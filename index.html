@@ -1,1 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Sign-In/Sign-Up</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
 
+        /* Form Reset Styles for Cleaner Look */
+        h2 { margin: 0; }
+        p { font-size: 14px; font-weight: 300; line-height: 20px; letter-spacing: 0.5px; margin: 20px 0 30px; }
+        span { font-size: 12px; }
+        a { color: #333; font-size: 14px; text-decoration: none; margin: 15px 0; }
+        button { cursor: pointer; }
+        button:focus { outline: none; }
+        
+        button.ghost { 
+            background-color: transparent; 
+            border-color: #FFFFFF; 
+        }
+
+        /* Base States */
+        .sign-in-container {
+            left: 0;
+            width: 50%;
+            z-index: 2;
+        }
+
+        .sign-up-container {
+            left: 0;
+            width: 50%;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .overlay-container {
+            left: 50%;
+            width: 50%;
+            z-index: 100;
+        }
+
+        .overlay {
+            width: 200%;
+            left: -100%;
+            transform: translateX(0);
+        }
+
+        .overlay-panel {
+            width: 50%;
+            transform: translateX(0);
+        }
+
+        .overlay-left {
+            transform: translateX(-20%);
+        }
+
+        .overlay-right {
+            right: 0;
+            transform: translateX(0);
+        }
+
+        /* CSS Animation Hooks for Active State */
+        .container.right-panel-active .sign-in-container {
+            transform: translateX(100%);
+        }
+
+        .container.right-panel-active .sign-up-container {
+            transform: translateX(100%);
+            opacity: 1;
+            z-index: 5;
+            animation: show 0.6s;
+        }
+
+        @keyframes show {
+            0%, 49.99% {
+                opacity: 0;
+                z-index: 1;
+            }
+            50%, 100% {
+                opacity: 1;
+                z-index: 5;
+            }
+        }
+
+        .container.right-panel-active .overlay-container {
+            transform: translateX(-100%);
+        }
+
+        .container.right-panel-active .overlay {
+            transform: translateX(50%);
+        }
+
+        .container.right-panel-active .overlay-left {
+            transform: translateX(0);
+        }
+
+        .container.right-panel-active .overlay-right {
+            transform: translateX(20%);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    
+    <!-- Main Container Card Wrapper -->
+    <div class="container relative w-full max-w-4xl min-h-[480px] bg-white rounded-2xl shadow-2xl overflow-hidden" id="container">
+        
+        <!-- Sign Up Container -->
+        <div class="absolute top-0 h-full transition-all duration-500 ease-in-out sign-up-container bg-white flex flex-col items-center justify-center px-12 text-center">
+            <h2 class="font-bold text-3xl">Create Account</h2>
+            <div class="flex justify-center space-x-4 my-5 mt-4">
+                <a href="#" class="border border-gray-300 rounded-full p-3 hover:bg-gray-50 flex items-center justify-center w-10 h-10 transition-colors"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="border border-gray-300 rounded-full p-3 hover:bg-gray-50 flex items-center justify-center w-10 h-10 transition-colors"><i class="fab fa-google"></i></a>
+                <a href="#" class="border border-gray-300 rounded-full p-3 hover:bg-gray-50 flex items-center justify-center w-10 h-10 transition-colors"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <span class="text-gray-500 text-sm mb-4">or use your email for registration</span>
+            <input type="text" placeholder="Name" class="bg-gray-100 border-none p-3 my-2 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+            <input type="email" placeholder="Email" class="bg-gray-100 border-none p-3 my-2 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+            <input type="password" placeholder="Password" class="bg-gray-100 border-none p-3 my-2 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+            <button class="bg-indigo-600 text-white rounded-full px-8 py-3 font-bold uppercase tracking-wider mt-4 hover:scale-105 transition-transform duration-300 shadow-lg active:scale-95">Sign Up</button>
+        </div>
+
+        <!-- Sign In Container -->
+        <div class="absolute top-0 h-full transition-all duration-500 ease-in-out sign-in-container bg-white flex flex-col items-center justify-center px-12 text-center">
+            <h2 class="font-bold text-3xl">Sign in</h2>
+            <div class="flex justify-center space-x-4 my-5 mt-4">
+                <a href="#" class="border border-gray-300 rounded-full p-3 hover:bg-gray-50 flex items-center justify-center w-10 h-10 transition-colors"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="border border-gray-300 rounded-full p-3 hover:bg-gray-50 flex items-center justify-center w-10 h-10 transition-colors"><i class="fab fa-google"></i></a>
+                <a href="#" class="border border-gray-300 rounded-full p-3 hover:bg-gray-50 flex items-center justify-center w-10 h-10 transition-colors"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <span class="text-gray-500 text-sm mb-4">or use your account</span>
+            <input type="email" placeholder="Email" class="bg-gray-100 border-none p-3 my-2 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+            <input type="password" placeholder="Password" class="bg-gray-100 border-none p-3 my-2 rounded-lg w-full focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+            <a href="#" class="text-gray-500 text-sm hover:text-indigo-600 font-medium">Forgot your password?</a>
+            <button class="bg-indigo-600 text-white rounded-full px-8 py-3 font-bold uppercase tracking-wider mt-4 hover:scale-105 transition-transform duration-300 shadow-lg active:scale-95">Sign In</button>
+        </div>
+
+        <!-- Overlay Container Wrapper -->
+        <div class="absolute top-0 overflow-hidden transition-all duration-500 ease-in-out overlay-container h-full">
+            <div class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white relative h-full transition-all duration-500 ease-in-out overlay flex">
+                
+                <!-- Overlay Left (Visible when moving right to sign up) -->
+                <div class="absolute flex flex-col items-center justify-center px-10 text-center top-0 h-full transition-all duration-500 ease-in-out overlay-panel overlay-left">
+                    <h2 class="font-bold text-3xl text-white">Welcome Back!</h2>
+                    <p class="text-white">To keep connected with us please login with your personal info</p>
+                    <button class="ghost border-2 border-white text-white rounded-full px-8 py-3 font-bold uppercase tracking-wider hover:bg-white hover:text-indigo-600 transition-colors duration-300 shadow-md active:scale-95" id="signIn">Sign In</button>
+                </div>
+
+                <!-- Overlay Right (Visible on initial sign in view) -->
+                <div class="absolute flex flex-col items-center justify-center px-10 text-center top-0 h-full transition-all duration-500 ease-in-out overlay-panel overlay-right">
+                    <h2 class="font-bold text-3xl text-white">Hello, Friend!</h2>
+                    <p class="text-white">Enter your personal details and start journey with us</p>
+                    <button class="ghost border-2 border-white text-white rounded-full px-8 py-3 font-bold uppercase tracking-wider hover:bg-white hover:text-indigo-600 transition-colors duration-300 shadow-md active:scale-95" id="signUp">Sign Up</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Animation Logic -->
+    <script src="script.js"></script>
+</body>
+</html>

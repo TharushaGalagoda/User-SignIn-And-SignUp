@@ -1,0 +1,95 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Form Reset Styles for Cleaner Look */
+h2 { margin: 0; }
+p { font-size: 14px; font-weight: 300; line-height: 20px; letter-spacing: 0.5px; margin: 20px 0 30px; }
+span { font-size: 12px; }
+a { color: #333; font-size: 14px; text-decoration: none; margin: 15px 0; }
+button { cursor: pointer; }
+button:focus { outline: none; }
+
+button.ghost { 
+    background-color: transparent; 
+    border-color: #FFFFFF; 
+}
+
+/* Base States */
+.sign-in-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.sign-up-container {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.overlay-container {
+    left: 50%;
+    width: 50%;
+    z-index: 100;
+}
+
+.overlay {
+    width: 200%;
+    left: -100%;
+    transform: translateX(0);
+}
+
+.overlay-panel {
+    width: 50%;
+    transform: translateX(0);
+}
+
+.overlay-left {
+    transform: translateX(-20%);
+}
+
+.overlay-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+/* CSS Animation Hooks for Active State */
+.container.right-panel-active .sign-in-container {
+    transform: translateX(100%);
+}
+
+.container.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: show 0.6s;
+}
+
+@keyframes show {
+    0%, 49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+    50%, 100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.container.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+}
+
+.container.right-panel-active .overlay {
+    transform: translateX(50%);
+}
+
+.container.right-panel-active .overlay-left {
+    transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
+    transform: translateX(20%);
+}
